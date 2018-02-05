@@ -397,6 +397,7 @@ class MentionsInput extends React.Component {
 
   updateSuggestionsPosition = () => {
     let { caretPosition } = this.state;
+    let {placement} = this.props;
 
     if(!caretPosition || !this.refs.suggestions) {
       return;
@@ -421,7 +422,13 @@ class MentionsInput extends React.Component {
       position.left = left
     }
 
-    position.top = caretPosition.top - highlighter.scrollTop;
+    let top = caretPosition.top - highlighter.scrollTop;
+    if (placement === 'bottom') {
+      position.top = top - suggestions.offsetHeight;
+    }
+    else {
+      position.top = top;
+    }
 
     if(isEqual(position, this.state.suggestionsPosition)) {
       return;

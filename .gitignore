@@ -9,3 +9,4 @@ coverage
 lib
 .grunt
 results
+*.swp
