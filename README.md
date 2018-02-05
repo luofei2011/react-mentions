@@ -80,6 +80,7 @@ Each data source is configured using a `Mention` component, which has the follow
 | renderSuggestion | function (entry, search, highlightedDisplay, index)              | `null`          | Allows customizing how mention suggestions are rendered (optional)         |
 | onAdd            | function (id, display) | empty function  | Callback invoked when a suggestion has been added (optional)                |
 | appendSpaceOnAdd | boolean                | false           | Append a space when a suggestion has been added (optional)                  |
+| placement        | string                 | `top`           | The position of suggestionOverlay, optional value: `top|bottom` |
 
 If a function is passed as the `data` prop, that function will be called with the current search query as first, and a callback function as second argument. The callback can be used to provide results asynchronously, e.g., after fetch requests. (It can even be called multiple times to update the list of suggestions.)
 
