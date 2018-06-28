@@ -1,9 +1,13 @@
-export default ({
+export default {
   control: {
     backgroundColor: '#fff',
 
     fontSize: 12,
     fontWeight: 'normal',
+  },
+
+  highlighter: {
+    overflow: 'hidden',
   },
 
   input: {
@@ -64,4 +68,4 @@ export default ({
       },
     },
   },
-})
+}
