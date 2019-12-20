@@ -1,14 +1,19 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { defaultStyle } from 'substyle'
-import omit from 'lodash/omit'
-import keys from 'lodash/keys'
+
+import { 
+  getSubstringIndex,
+  keys,
+  omit
+} from './utils'
 
 class Suggestion extends Component {
   static propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     query: PropTypes.string.isRequired,
     index: PropTypes.number.isRequired,
+    ignoreAccents: PropTypes.bool,
 
     suggestion: PropTypes.oneOfType([
       PropTypes.string,
@@ -18,7 +23,7 @@ class Suggestion extends Component {
         display: PropTypes.string,
       }),
     ]).isRequired,
-    descriptor: PropTypes.object.isRequired,
+    renderSuggestion: PropTypes.func,
 
     focused: PropTypes.bool,
   }
@@ -34,17 +39,18 @@ class Suggestion extends Component {
   }
 
   renderContent() {
-    let { query, descriptor, suggestion, index } = this.props
+    let { query, renderSuggestion, suggestion, index, focused } = this.props
 
     let display = this.getDisplay()
     let highlightedDisplay = this.renderHighlightedDisplay(display, query)
 
-    if (descriptor.props.renderSuggestion) {
-      return descriptor.props.renderSuggestion(
+    if (renderSuggestion) {
+      return renderSuggestion(
         suggestion,
         query,
         highlightedDisplay,
-        index
+        index,
+        focused
       )
     }
 
@@ -60,7 +66,7 @@ class Suggestion extends Component {
 
     let { id, display } = suggestion
 
-    if (!id || !display) {
+    if (id === undefined || !display) {
       return id
     }
 
@@ -68,9 +74,9 @@ class Suggestion extends Component {
   }
 
   renderHighlightedDisplay(display) {
-    const { query, style } = this.props
+    const { ignoreAccents, query, style } = this.props
 
-    let i = display.toLowerCase().indexOf(query.toLowerCase())
+    let i = getSubstringIndex(display, query, ignoreAccents)
 
     if (i === -1) {
       return <span {...style('display')}>{display}</span>

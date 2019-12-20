@@ -1,5 +1,4 @@
 import React from 'react'
-import { merge } from 'lodash'
 import { compose, withHandlers } from 'recompose'
 
 import { MentionsInput, Mention } from '../../../src'
@@ -8,6 +7,8 @@ import { provideExampleValue } from './higher-order'
 
 import defaultStyle from './defaultStyle'
 import defaultMentionStyle from './defaultMentionStyle'
+
+import { merge } from '../../../src/utils'
 
 const style = merge({}, defaultStyle, {
   suggestions: {
@@ -21,6 +22,7 @@ const style = merge({}, defaultStyle, {
 })
 
 function Advanced({ value, data, onChange, onBlur, onAdd }) {
+  let inputEl = React.createRef()
   return (
     <div className="advanced">
       <h3>Advanced options</h3>
@@ -29,12 +31,25 @@ function Advanced({ value, data, onChange, onBlur, onAdd }) {
         value={value}
         onChange={onChange}
         onBlur={onBlur}
-        markup="{{__id__}}"
         style={style}
-        displayTransform={id => `<-- ${id} -->`}
+        inputRef={inputEl}
       >
-        <Mention data={data} onAdd={onAdd} style={defaultMentionStyle} />
+        <Mention
+          markup="{{__id__}}"
+          displayTransform={id => `<-- ${id} -->`}
+          data={data}
+          onAdd={onAdd}
+          style={defaultMentionStyle}
+        />
       </MentionsInput>
+
+      <button
+        onClick={() => {
+          inputEl.current.focus()
+        }}
+      >
+        focus programmatically
+      </button>
     </div>
   )
 }

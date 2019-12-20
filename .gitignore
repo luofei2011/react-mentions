@@ -1,7 +1,11 @@
+/node_modules
+
+/reports
 /coverage
 /demo/dist
-/es
-/node_modules
-/umd
+/dist
+/demo/build
+
 npm-debug.log*
-*.swp
+
+*.log

@@ -1,13 +1,18 @@
+import Radium from 'radium'
 import React from 'react'
 import { EnhancerProvider } from 'substyle'
-import Radium from 'radium'
 
-import MultipleTrigger from './MultipleTrigger'
-import SingleLine from './SingleLine'
 import Advanced from './Advanced'
-import CssModules from './CssModules'
 import AsyncGithubUserMentions from './AsyncGithubUserMentions'
+import CssModules from './CssModules'
+import Emojis from './Emojis'
+import ExperimentalCutCopyPaste from './ExperimentalCutCopyPaste'
+import MultipleTrigger from './MultipleTrigger'
 import Scrollable from './Scrollable'
+import SingleLine from './SingleLine'
+import SingleLineIgnoringAccents from './SingleLineIgnoringAccents'
+import SuggestionPortal from './SuggestionPortal'
+import BottomGuard from "./BottomGuard";
 
 const users = [
   {
@@ -38,6 +43,10 @@ const users = [
     id: 'mike',
     display: 'Mike Ehrmantraut',
   },
+  {
+    id: 'lydia',
+    display: 'Lydìã Rôdarté-Qüayle'
+  }
 ]
 
 export default function Examples() {
@@ -46,10 +55,15 @@ export default function Examples() {
       <div>
         <MultipleTrigger data={users} />
         <SingleLine data={users} />
+        <SingleLineIgnoringAccents data={users} />
         <Scrollable data={users} />
         <Advanced data={users} />
+        <ExperimentalCutCopyPaste data={users} />
         <CssModules data={users} />
         <AsyncGithubUserMentions data={users} />
+        <Emojis data={users} />
+        <SuggestionPortal data={users} />
+        <BottomGuard data={users} />
       </div>
     </EnhancerProvider>
   )

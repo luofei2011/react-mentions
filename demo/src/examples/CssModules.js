@@ -11,11 +11,11 @@ function CssModules({ value, data, onChange }) {
     <div className="advanced">
       <h3>Styling with css modules</h3>
 
-      <MentionsInput value={value} onChange={onChange} classNames={classNames}>
+      <MentionsInput value={value} onChange={onChange} className="mentions" classNames={classNames}>
         <Mention data={data} className={classNames.mentions__mention} />
       </MentionsInput>
     </div>
   )
 }
 
-export default provideExampleValue('')(CssModules)
+export default provideExampleValue('Hi @[John Doe](johndoe)')(CssModules)
